@@ -11,8 +11,7 @@ setuptools.setup(
     author_email='ruilongl@usc.edu',    
     license='MIT License',
     packages=setuptools.find_packages(),
-    install_requires=INSTALL_REQUIREMENTS,
-    install_requires=[
+    install_requires=INSTALL_REQUIREMENTS + [
         'segmentation_models_pytorch@git+https://github.com/qubvel/segmentation_models.pytorch',
         'human_det@git+https://github.com/liruilong940607/human_det',
     ]
