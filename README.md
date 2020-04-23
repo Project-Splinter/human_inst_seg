@@ -6,7 +6,6 @@ A Single Human Instance Segmentor runs at **50 FPS** on GV100.
 
 ```
 pip install git+https://github.com/liruilong940607/human_inst_seg --upgrade
-
 ```
 
 ## Train
