@@ -1,6 +1,6 @@
 import setuptools
 
-INSTALL_REQUIREMENTS = ['numpy', 'torch', 'torchvision', 'Pillow', 'opencv-python', 'tqdm', 'imageio']
+INSTALL_REQUIREMENTS = ['numpy', 'torch', 'torchvision', 'Pillow', 'scikit-image', 'opencv-python', 'tqdm', 'imageio']
 
 setuptools.setup(
     name='human_inst_seg',
