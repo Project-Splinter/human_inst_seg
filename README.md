@@ -19,6 +19,15 @@ python human_inst_seg/train.py
 
 ## Usage
 
+```
+# images
+python demo.py --images <IMAGE_PATH> <IMAGE_PATH> <IMAGE_PATH> --loop --vis
+# videos
+python demo.py --videos <VIDEO_PATH> <VIDEO_PATH> <VIDEO_PATH> --vis
+# capture device
+python demo.py --camera --vis
+```
+
 see also in `demo.py`
 
 ```
