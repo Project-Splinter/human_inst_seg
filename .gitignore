@@ -103,15 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-data/results
-data/test
-data/datasets
-data/*.zip
-
-examples/unsupervised_recon
-examples/photo_recon
-examples/recon/demo.py
-examples/recon/script.sh
+data/
 
 .DS_Store
-data/
