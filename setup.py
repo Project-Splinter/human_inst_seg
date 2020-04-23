@@ -3,9 +3,9 @@ import setuptools
 INSTALL_REQUIREMENTS = ['numpy', 'torch', 'torchvision', 'Pillow', 'opencv-python', 'tqdm', 'imageio']
 
 setuptools.setup(
-    name='human_det',
-    url='https://github.com/liruilong940607/human_det',
-    description='A Single Human Detector runs at 70 FPS on GV100',    
+    name='human_inst_seg',
+    url='https://github.com/liruilong940607/human_inst_seg',
+    description='A Single Human Instance Segmentor runs at 50 FPS on GV100',    
     version='0.0.1',
     author='Ruilong Li',
     author_email='ruilongl@usc.edu',    

@@ -1,6 +1,6 @@
 # Human Instance Segmentation
 
-A Single Human Instance Segmentor runs at **XX FPS** on GV100.
+A Single Human Instance Segmentor runs at **50 FPS** on GV100.
 
 ## Install
 
