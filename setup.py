@@ -14,6 +14,7 @@ setuptools.setup(
     install_requires=INSTALL_REQUIREMENTS,
     install_requires=[
         'segmentation_models_pytorch@git+https://github.com/qubvel/segmentation_models.pytorch',
+        'human_det@git+https://github.com/liruilong940607/human_det',
     ]
 )
 
