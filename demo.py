@@ -6,7 +6,7 @@ import torch
 
 import human_inst_seg
 # this can be install by:
-# pip install git+https://github.com/liruilong940607/streamer_pytorch --upgrade
+# pip install git+https://github.com/Project-Splinter/streamer_pytorch --upgrade
 import streamer_pytorch as streamer
 
 parser = argparse.ArgumentParser(description='.')

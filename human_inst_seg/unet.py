@@ -43,7 +43,7 @@ def scale_boxes(boxes, scale):
     return scaled_boxes
 
 class Segmentation(nn.Module):
-    def __init__(self, ckpt=None, device="cuda:0", init=True):
+    def __init__(self, ckpt=None, device="cuda:0", init=True, verbose=False):
         super().__init__()
         model = smp.Unet(
             'resnet18',
@@ -58,6 +58,7 @@ class Segmentation(nn.Module):
         
         self.device = device
         self.model = model
+        self.verbose = verbose
 
         self.det_engine = Detection(device=device)
         
@@ -72,32 +73,38 @@ class Segmentation(nn.Module):
                 "https://drive.google.com/uc?export=download&id=18d2yeCx62Gup-YzgsI866uxpEo9kIl2T")
         self.load_state_dict(state_dict)
 
-    def forward(self, input):  
+    def forward(self, input, scaled_boxes=None):  
         # input is 1 x 3 x H x W
         Batch, _, H, W = input.size() 
         input = input.to(self.device)
 
         # det
-        with torch.no_grad(): 
-            bboxes_det, probs_det = self.det_engine(input)
-            
-            probs = probs_det.unsqueeze(3)
-            bboxes = (bboxes_det * probs).sum(dim=1, keepdim=True) / probs.sum(dim=1, keepdim=True)
-            bboxes = bboxes[:, 0, 0, :]
-            
-            w_half = (bboxes[:, 2] - bboxes[:, 0]) * 0.5
-            h_half = (bboxes[:, 3] - bboxes[:, 1]) * 0.5
-            x_c = (bboxes[:, 2] + bboxes[:, 0]) * 0.5
-            y_c = (bboxes[:, 3] + bboxes[:, 1]) * 0.5
-            h_half *= 1.2 if not self.training else random.uniform(1.0, 1.5)
-            w_half = h_half / 288 * 192
-            scaled_boxes = torch.zeros_like(bboxes)
-            scaled_boxes[:, 0] = x_c - w_half
-            scaled_boxes[:, 2] = x_c + w_half
-            scaled_boxes[:, 1] = y_c - h_half
-            scaled_boxes[:, 3] = y_c + h_half    
-            scaled_boxes = [box.unsqueeze(0) for box in scaled_boxes]
+        if scaled_boxes is None:
+            with torch.no_grad(): 
+                bboxes_det, probs_det = self.det_engine(input)
+                
+                probs = probs_det.unsqueeze(3)
+                bboxes = (bboxes_det * probs).sum(dim=1, keepdim=True) / probs.sum(dim=1, keepdim=True)
+                bboxes = bboxes[:, 0, 0, :]
+                
+                w_half = (bboxes[:, 2] - bboxes[:, 0]) * 0.5
+                h_half = (bboxes[:, 3] - bboxes[:, 1]) * 0.5
+                x_c = (bboxes[:, 2] + bboxes[:, 0]) * 0.5
+                y_c = (bboxes[:, 3] + bboxes[:, 1]) * 0.5
+                h_half *= 1.2 if not self.training else random.uniform(1.0, 1.5)
+                w_half = h_half / 288 * 192
+                scaled_boxes = torch.zeros_like(bboxes)
+                scaled_boxes[:, 0] = x_c - w_half
+                scaled_boxes[:, 2] = x_c + w_half
+                scaled_boxes[:, 1] = y_c - h_half
+                scaled_boxes[:, 3] = y_c + h_half    
+                scaled_boxes = [box.unsqueeze(0) for box in scaled_boxes]
+        else:
+            bboxes_det, probs_det = None, None
 
+        if self.verbose:
+            print (scale_boxes)
+        
         # seg
         output = self.model(
             torchvision.ops.roi_align(input, scaled_boxes, (288, 192)))

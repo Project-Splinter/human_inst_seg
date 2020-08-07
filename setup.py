@@ -4,7 +4,7 @@ INSTALL_REQUIREMENTS = ['numpy', 'torch', 'torchvision', 'Pillow', 'scikit-image
 
 setuptools.setup(
     name='human_inst_seg',
-    url='https://github.com/liruilong940607/human_inst_seg',
+    url='https://github.com/Project-Splinter/human_inst_seg',
     description='A Single Human Instance Segmentor runs at 50 FPS on GV100', 
     version='0.0.1',
     author='Ruilong Li',
@@ -13,7 +13,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=INSTALL_REQUIREMENTS + [
         'segmentation_models_pytorch@git+https://github.com/qubvel/segmentation_models.pytorch',
-        'human_det@git+https://github.com/liruilong940607/human_det',
+        'human_det@git+https://github.com/Project-Splinter/human_det',
     ]
 )
 
