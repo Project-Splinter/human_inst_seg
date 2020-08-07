@@ -6,7 +6,7 @@ setuptools.setup(
     name='human_inst_seg',
     url='https://github.com/Project-Splinter/human_inst_seg',
     description='A Single Human Instance Segmentor runs at 50 FPS on GV100', 
-    version='0.0.1',
+    version='0.0.2',
     author='Ruilong Li',
     author_email='ruilongl@usc.edu',    
     license='MIT License',
