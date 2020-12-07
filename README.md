@@ -1,6 +1,6 @@
 # Human Instance Segmentation
 
-A Single-Human Instance Segmentor runs at **50 FPS** on GV100. Both training and inference is included in this repo.
+A Single-Human Instance Segmentor runs at **50 FPS** on GV100. Both training and inference are included in this repo.
 
 ## Install
 
